@@ -5,7 +5,9 @@
 	"author": "maple3142 <kirby741852963@gmail.com>",
 	"license": "MIT",
 	"dependencies": {
-		"httpsrv": "^0.3.0"
+		"express": "^4.17.1",
+		"httpsrv": "^0.3.0",
+		"request": "^2.88.0"
 	},
 	"scripts": {
 		"start": "node index.js"
