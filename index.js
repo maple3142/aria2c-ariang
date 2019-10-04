@@ -5,7 +5,7 @@ const request = require('request')
 const PORT = process.env.PORT || 1234
 const app = express()
 app.get('/jsonrpc', (req, res) => {
-	req.pipe(request('https://localhost:6800/jsonrpc')).pipe(res)
+	req.pipe(request('http://localhost:6800/jsonrpc')).pipe(res)
 })
 app.use(
 	httpsrv({
