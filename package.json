@@ -1,0 +1,13 @@
+{
+	"name": "heroku-aria2c",
+	"version": "1.0.0",
+	"main": "index.js",
+	"author": "maple3142 <kirby741852963@gmail.com>",
+	"license": "MIT",
+	"dependencies": {
+		"httpsrv": "^0.3.0"
+	},
+	"scripts": {
+		"start": "node index.js"
+	}
+}
