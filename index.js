@@ -22,7 +22,8 @@ app.get('/', (req, res) => {
 	const host = req.headers.host
 	const url = `https://${host}/ariang/#!/settings/rpc/set/https/${host}/443/jsonrpc/${ENCODED_SECRET}`
 	res.send(`
-<a href="${url}">AriaNg Panel</a>
+<a href="${url}" target="_blank">AriaNg Panel</a>
+<br>
 <a href="/downloads/">Downloaded files</a>
 `)
 })
