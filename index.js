@@ -8,8 +8,10 @@ app.get('/jsonrpc', (req, res) => {
 	req.pipe(request('http://localhost:6800/jsonrpc')).pipe(res)
 })
 app.use(
+	'/downloads',
 	httpsrv({
 		basedir: __dirname + '/downloads'
 	})
 )
+app.use(express.static(__dirname + '/ariang'))
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))

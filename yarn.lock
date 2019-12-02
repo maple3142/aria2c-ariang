@@ -1668,10 +1668,10 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-httpsrv@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/httpsrv/-/httpsrv-0.3.0.tgz#fc930b53679fabf3398d720688d6fede563d93d2"
-  integrity sha512-Ff3HpW3h4QzI0uT1cv7eJwoe8wu56kjiTV4opsEBMhDZCOwTARLciTgvLRN8lQl/9dqWhP+vXHL64mbsrHzS7g==
+httpsrv@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/httpsrv/-/httpsrv-0.3.1.tgz#4d0b02e8de8d4fb32a0fe5528e9d0dff91931049"
+  integrity sha512-f3WNY8a2XMXJOUBTJOKfXlLq9sXmYfksw1uliaaHGf6x3+w7cHXzGd2eK17CoogvqXt4IRRbK/ZOj2I0Peb+TQ==
   dependencies:
     babel-cli "^6.26.0"
     babel-core "^6.26.0"
