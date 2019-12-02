@@ -8,5 +8,13 @@
 			"description": "Aria2c's secret",
 			"value": "DEFAULT_SECRET"
 		}
-	}
+	},
+	"buildpacks": [
+		{
+			"url": "heroku/nodejs"
+		},
+		{
+			"url": "https://github.com/Aerovin/aria2c.git"
+		}
+	]
 }
