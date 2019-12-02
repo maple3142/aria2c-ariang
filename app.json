@@ -6,7 +6,7 @@
 	"env": {
 		"ARIA2C_SECRET": {
 			"description": "Aria2c's secret",
-			"generator": "DEFAULT_SECRET"
+			"value": "DEFAULT_SECRET"
 		}
 	}
 }
