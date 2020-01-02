@@ -11,19 +11,16 @@
 		"RCLONE_CONFIG": {
 			"description": "Rclone config to mount in one line, replace line breaks with \"\\n\""
 		},
-		"RCLONE_MOUNT_PATH": {
-			"description": "Path to mount in your Rclone drive. Must start with a forward slash."
+		"RCLONE_DESTINATION": {
+			"description": "Path to store your file in your Rclone drive. Must start with a forward slash."
 		}
 	},
 	"buildpacks": [
 		{
+			"url": "heroku-community/apt"
+		},
+		{
 			"url": "heroku/nodejs"
-		},
-		{
-			"url": "https://github.com/Aerovin/aria2c.git"
-		},
-		{
-			"url": "https://github.com/amivin/rclone-heroku.git"
 		}
 	]
 }
