@@ -7,6 +7,12 @@
 		"ARIA2C_SECRET": {
 			"description": "Aria2c's secret",
 			"value": "DEFAULT_SECRET"
+		},
+		"RCLONE_CONFIG": {
+			"description": "Rclone config to mount in one line, replace line breaks with \"\\n\""
+		},
+		"RCLONE_MOUNT_PATH": {
+			"description": "Path to mount in your Rclone drive. Must start with a forward slash."
 		}
 	},
 	"buildpacks": [
@@ -15,6 +21,9 @@
 		},
 		{
 			"url": "https://github.com/Aerovin/aria2c.git"
+		},
+		{
+			"url": "https://github.com/amivin/rclone-heroku.git"
 		}
 	]
 }
