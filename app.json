@@ -10,11 +10,11 @@
 		},
 		"RCLONE_CONFIG": {
 			"description": "Rclone config to mount in one line, replace line breaks with \"\\n\"",
-			"required": "false"
+			"required": false
 		},
 		"RCLONE_DESTINATION": {
 			"description": "Path to store your file in your Rclone drive. Must start with a forward slash.",
-			"required": "false"
+			"required": false
 		}
 	},
 	"buildpacks": [
