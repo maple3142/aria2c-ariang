@@ -1,6 +1,7 @@
 const express = require('express')
 const httpsrv = require('httpsrv')
-const request = require('request')
+const expressWs = require('express-ws')
+const websocket = require('websocket-stream')
 const fs = require('fs')
 const ENCODED_SECRET = Buffer.from(
 	/rpc-secret=(.*)/.exec(fs.readFileSync('aria2c.conf', 'utf-8'))[1]
@@ -8,8 +9,11 @@ const ENCODED_SECRET = Buffer.from(
 
 const PORT = process.env.PORT || 1234
 const app = express()
-app.use('/jsonrpc', (req, res) => {
-	req.pipe(request('http://localhost:6800/jsonrpc')).pipe(res)
+expressWs(app)
+app.ws('/jsonrpc', (ws, req) => {
+	const aria = websocket('ws://localhost:6800/jsonrpc')
+	ws.on('message', msg => aria.write(msg))
+	aria.on('data', msg => ws.send(msg.toString('utf-8')))
 })
 app.use(
 	'/downloads',
@@ -20,7 +24,7 @@ app.use(
 app.use('/ariang', express.static(__dirname + '/ariang'))
 app.get('/', (req, res) => {
 	const host = req.headers.host
-	const url = `https://${host}/ariang/#!/settings/rpc/set/https/${host}/443/jsonrpc/${ENCODED_SECRET}`
+	const url = `https://${host}/ariang/#!/settings/rpc/set/wss/${host}/443/jsonrpc/${ENCODED_SECRET}`
 	res.send(`
 <a href="${url}" target="_blank">AriaNg Panel</a>
 <br>
