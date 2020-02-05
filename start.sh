@@ -1,4 +1,12 @@
 #!/bin/bash
+
+# Install rclone static binary
+wget https://downloads.rclone.org/v1.51.0/rclone-v1.51.0-linux-amd64.zip
+unzip rclone-v1.51.0-linux-amd64.zip
+export PATH=$PWD/rclone-v1.51.0-linux-amd64:$PATH
+rclone --version
+
+# Create download folder
 mkdir -p downloads
 
 if [[ -n $RCLONE_CONFIG && -n $RCLONE_DESTINATION ]]; then
