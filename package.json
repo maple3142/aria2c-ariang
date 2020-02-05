@@ -6,9 +6,8 @@
 	"license": "MIT",
 	"dependencies": {
 		"express": "^4.17.1",
-		"express-ws": "^4.0.0",
-		"httpsrv": "^0.3.2",
-		"websocket-stream": "^5.5.0"
+		"http-proxy": "^1.18.0",
+		"httpsrv": "^0.3.2"
 	},
 	"scripts": {
 		"start": "node index.js"

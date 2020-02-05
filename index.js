@@ -1,7 +1,7 @@
+const http = require('http')
+const httpProxy = require('http-proxy')
 const express = require('express')
 const httpsrv = require('httpsrv')
-const expressWs = require('express-ws')
-const websocket = require('websocket-stream')
 const fs = require('fs')
 const ENCODED_SECRET = Buffer.from(
 	/rpc-secret=(.*)/.exec(fs.readFileSync('aria2c.conf', 'utf-8'))[1]
@@ -9,12 +9,18 @@ const ENCODED_SECRET = Buffer.from(
 
 const PORT = process.env.PORT || 1234
 const app = express()
-expressWs(app)
-app.ws('/jsonrpc', (ws, req) => {
-	const aria = websocket('ws://localhost:6800/jsonrpc')
-	ws.on('message', msg => aria.write(msg))
-	aria.on('data', msg => ws.send(msg.toString('utf-8')))
+const proxy = httpProxy.createProxyServer({
+	target: 'ws://localhost:6800',
+	ws: true
 })
+const server = http.createServer(app)
+
+// Proxy websocket
+server.on('upgrade', (req, socket, head) => {
+	proxy.ws(req, socket, head)
+})
+
+// Handle normal http traffic
 app.use(
 	'/downloads',
 	httpsrv({
@@ -31,4 +37,4 @@ app.get('/', (req, res) => {
 <a href="/downloads/">Downloaded files</a>
 `)
 })
-app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
+server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
