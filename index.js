@@ -1,6 +1,7 @@
 const http = require('http')
 const httpProxy = require('http-proxy')
 const express = require('express')
+const request = require('request')
 const httpsrv = require('httpsrv')
 const fs = require('fs')
 const ENCODED_SECRET = Buffer.from(
@@ -21,6 +22,9 @@ server.on('upgrade', (req, socket, head) => {
 })
 
 // Handle normal http traffic
+app.use('/jsonrpc', (req, res) => {
+	req.pipe(request('http://localhost:6800/jsonrpc')).pipe(res)
+})
 app.use(
 	'/downloads',
 	httpsrv({
