@@ -4,9 +4,10 @@ const express = require('express')
 const request = require('request')
 const httpsrv = require('httpsrv')
 const fs = require('fs')
-const ENCODED_SECRET = Buffer.from(
-	/rpc-secret=(.*)/.exec(fs.readFileSync('aria2c.conf', 'utf-8'))[1]
-).toString('base64')
+const SECRET = /rpc-secret=(.*)/.exec(
+	fs.readFileSync('aria2c.conf', 'utf-8')
+)[1]
+const ENCODED_SECRET = Buffer.from(SECRET).toString('base64')
 
 const PORT = process.env.PORT || 1234
 const app = express()
@@ -42,3 +43,28 @@ app.get('/', (req, res) => {
 `)
 })
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
+
+const APP_URL = `https://${process.env.HEROKU_APP_NAME}.herokuapp.com`
+const preventIdling = () => {
+	request.post(
+		'http://localhost:6800/jsonrpc',
+		{
+			json: {
+				jsonrpc: '2.0',
+				method: 'aria2.getGlobalStat',
+				id: 'preventIdling',
+				params: [`token:${SECRET}`]
+			}
+		},
+		(err, resp, body) => {
+			console.log('preventIdling: getGlobalStat response', body)
+			const { numActive, numWaiting } = body.result
+			if (parseInt(numActive) + parseInt(numWaiting) > 0) {
+				console.log('preventIdling: make request to prevent idling')
+				request(APP_URL)
+			}
+		}
+	)
+	setTimeout(preventIdling, 15 * 60 * 1000) // 15 min
+}
+preventIdling()
