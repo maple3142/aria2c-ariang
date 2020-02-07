@@ -7,6 +7,7 @@ const fs = require('fs')
 const SECRET = /rpc-secret=(.*)/.exec(
 	fs.readFileSync('aria2c.conf', 'utf-8')
 )[1]
+const ENCODED_SECRET = Buffer.from(SECRET).toString('base64')
 
 const PORT = process.env.PORT || 1234
 const app = express()
@@ -26,24 +27,24 @@ app.use('/jsonrpc', (req, res) => {
 	req.pipe(request('http://localhost:6800/jsonrpc')).pipe(res)
 })
 app.use(
-	'/downloads',
+	'/downloads/' + ENCODED_SECRET,
 	httpsrv({
 		basedir: __dirname + '/downloads'
 	})
 )
 app.use('/ariang', express.static(__dirname + '/ariang'))
 app.get('/', (req, res) => {
-	const host = req.headers.host
 	res.send(`
 <label for="secret">Enter your aria2 secret:</label>
 <input id="secret" type="text">
-<button id="go">Go to AriaNg Panel</button>
-<br>
-<a href="/downloads/">Downloaded files</a>
+<button id="panel">Go to AriaNg panel</button>
+<button id="downloads">View downloaded files</button>
 <script>
-var urlWithoutSecret='https://${host}/ariang/#!/settings/rpc/set/wss/${host}/443/jsonrpc/'
-go.onclick=function(){
-	open(urlWithoutSecret+btoa(secret.value),'_blank')
+panel.onclick=function(){
+	open('/ariang/#!/settings/rpc/set/wss/'+location.hostname+'/443/jsonrpc/'+btoa(secret.value),'_blank')
+}
+downloads.onclick=function(){
+	open('/downloads/'+btoa(secret.value)+'/')
 }
 </script>
 `)
