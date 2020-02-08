@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+    aria2:
+        build:
+            context: ..
+            dockerfile: docker/Dockerfile
+        ports:
+            - 80:80
+            - 6800:6800
+        env_file:
+            - .env

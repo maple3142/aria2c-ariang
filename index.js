@@ -51,27 +51,29 @@ downloads.onclick=function(){
 })
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
 
-const APP_URL = `https://${process.env.HEROKU_APP_NAME}.herokuapp.com`
-const preventIdling = () => {
-	request.post(
-		'http://localhost:6800/jsonrpc',
-		{
-			json: {
-				jsonrpc: '2.0',
-				method: 'aria2.getGlobalStat',
-				id: 'preventIdling',
-				params: [`token:${SECRET}`]
+if (process.env.HEROKU_APP_NAME) {
+	const APP_URL = `https://${process.env.HEROKU_APP_NAME}.herokuapp.com`
+	const preventIdling = () => {
+		request.post(
+			'http://localhost:6800/jsonrpc',
+			{
+				json: {
+					jsonrpc: '2.0',
+					method: 'aria2.getGlobalStat',
+					id: 'preventIdling',
+					params: [`token:${SECRET}`]
+				}
+			},
+			(err, resp, body) => {
+				console.log('preventIdling: getGlobalStat response', body)
+				const { numActive, numWaiting } = body.result
+				if (parseInt(numActive) + parseInt(numWaiting) > 0) {
+					console.log('preventIdling: make request to prevent idling')
+					request(APP_URL)
+				}
 			}
-		},
-		(err, resp, body) => {
-			console.log('preventIdling: getGlobalStat response', body)
-			const { numActive, numWaiting } = body.result
-			if (parseInt(numActive) + parseInt(numWaiting) > 0) {
-				console.log('preventIdling: make request to prevent idling')
-				request(APP_URL)
-			}
-		}
-	)
-	setTimeout(preventIdling, 15 * 60 * 1000) // 15 min
+		)
+		setTimeout(preventIdling, 15 * 60 * 1000) // 15 min
+	}
+	preventIdling()
 }
-preventIdling()
