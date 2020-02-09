@@ -7,5 +7,7 @@ services:
         ports:
             - 80:80
             - 6800:6800
+            - 51413:6888
+            - 51413:6888/udp
         env_file:
             - .env

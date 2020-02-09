@@ -13,12 +13,14 @@ export PATH=$PWD/aria2-1.35.0-linux-gnu-64bit-build1:$PATH
 # Create download folder
 mkdir -p downloads
 
-# DHT
-wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht.dat
-wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht6.dat
+# Download P3TERX/aria2.conf
+curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/aria2.conf
+curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/autoupload.sh
+curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/delete.aria2.sh
+curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/delete.sh
+curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/dht.dat
+curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/dht6.dat
+touch aria2.session
 
 # Tracker
-tracker_list() {
-	curl -Ns https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt | awk '$1' | tr '\n' ',' | cat
-}
-echo "bt-tracker=$tracker_list" >> aria2c.conf
+curl -fsSL git.io/tracker.sh | bash
