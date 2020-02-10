@@ -52,6 +52,12 @@ downloads.onclick=function(){
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
 
 if (process.env.HEROKU_APP_NAME) {
+	const readNumUpload = () =>
+		new Promise((res, rej) =>
+			fs.readFile('numUpload', 'utf-8', (err, text) =>
+				err ? rej(err) : res(text)
+			)
+		)
 	const APP_URL = `https://${process.env.HEROKU_APP_NAME}.herokuapp.com`
 	const preventIdling = () => {
 		request.post(
@@ -64,10 +70,22 @@ if (process.env.HEROKU_APP_NAME) {
 					params: [`token:${SECRET}`]
 				}
 			},
-			(err, resp, body) => {
+			async (err, resp, body) => {
 				console.log('preventIdling: getGlobalStat response', body)
 				const { numActive, numWaiting } = body.result
-				if (parseInt(numActive) + parseInt(numWaiting) > 0) {
+				const numUpload = await readNumUpload()
+				console.log(
+					'preventIdling: numbers',
+					numActive,
+					numWaiting,
+					numUpload
+				)
+				if (
+					parseInt(numActive) +
+						parseInt(numWaiting) +
+						parseInt(numUpload) >
+					0
+				) {
 					console.log('preventIdling: make request to prevent idling')
 					request(APP_URL)
 				}
