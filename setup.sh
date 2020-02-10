@@ -15,7 +15,7 @@ mkdir -p downloads
 
 # Download P3TERX/aria2.conf
 curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/aria2.conf
-curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/autoupload.sh
+curl -fsSLO https://raw.githubusercontent.com/Yanxinwoo/aria2.conf/master/autoupload.sh
 curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/delete.aria2.sh
 curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/delete.sh
 curl -fsSLO https://raw.githubusercontent.com/P3TERX/aria2.conf/master/dht.dat
