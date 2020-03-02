@@ -18,4 +18,4 @@ elif [ -e "${topPath}.aria2" ]; then
 fi
 find "${topPath}" ! -path "${topPath}" -depth -type d -empty -exec rm -vrf {} \;
 
-echo -e "$(date +"%m/%d %H:%M:%S") ${INFO} Download error or stop, start deleting files..."
+echo -e "$(date +"%m/%d %H:%M:%S") ${INFO} Download error or stop, start deleting files finish"
