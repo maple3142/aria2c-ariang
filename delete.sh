@@ -1,7 +1,6 @@
 #!/bin/bash
-DOWNLOAD_PATH='./downloads'
 filePath=$3
-relativePath=${filePath#./downloads/}
+relativePath=${filepath#./downloads/}
 topPath=./downloads/${relativePath%%/*} # It will be the path of folder when it has multiple files, otherwise it will be the same as file path.
 
 LIGHT_GREEN_FONT_PREFIX="\033[1;32m"
@@ -17,4 +16,6 @@ elif [ -e "${filePath}.aria2" ]; then
 elif [ -e "${topPath}.aria2" ]; then
     rm -vrf "${topPath}.aria2" "${topPath}"
 fi
-find "${DOWNLOAD_PATH}" ! -path "${DOWNLOAD_PATH}" -depth -type d -empty -exec rm -vrf {} \;
+find "${topPath}" ! -path "${topPath}" -depth -type d -empty -exec rm -vrf {} \;
+
+echo -e "$(date +"%m/%d %H:%M:%S") ${INFO} Download error or stop, start deleting files..."
