@@ -1,7 +1,7 @@
 #!/bin/bash
 
 filePath=$3
-relativePath=${filePath#./downloads/}
+relativePath=${filepath#./downloads/}
 topPath=./downloads/${relativePath%%/*} # It will be the path of folder when it has multiple files, otherwise it will be the same as file path.
 
 LIGHT_GREEN_FONT_PREFIX="\033[1;32m"
@@ -12,8 +12,8 @@ echo -e "$(date +"%m/%d %H:%M:%S") ${INFO} Delete .aria2 file ..."
 
 if [ $2 -eq 0 ]; then
     exit 0
-elif [ -e "${filePath}.aria2" ]; then
-    rm -vf "${filePath}.aria2"
+elif [ -e "${filepath}.aria2" ]; then
+    rm -vf "${filepath}.aria2"
 elif [ -e "${topPath}.aria2" ]; then
     rm -vf "${topPath}.aria2"
 fi
