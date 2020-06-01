@@ -10,12 +10,12 @@
 2. Find your `rclone.conf` file, it should look like this:
 
 ```conf
-[DRIVENAME]
-type = WHATEVER
-client_id = WHATEVER
-client_secret = WHATEVER
-scope = WHATEVER
-token = WHATEVER
+[private]
+type = drive
+client_id = 563697918299-ofs4hlmn0u7pr724rmkjtvdq30pjt252.apps.googleusercontent.com
+client_secret = M7Z9V9WRF3LuzKaATCdCb3Oc
+scope = drive
+token = {"access_token":"ya29.a0AfH6SMAFnRhDXQsYoWr7KJVSgql6kVDJGv5puS_F3ENyHJpolQI9OG-pczSfVIfLsVeNiioGruvQdYZA4Cr7KGeK_BlD9veUgfoa9WRdSp0VG_7HJK7v_1FSTTyuud8qTeRORgLNGfxyYtXTw_Yb53EoIH9e6fm-duk","token_type":"Bearer","refresh_token":"1//0gM3912wVqAzWCgYIARAAGBASNwF-L9Irwc6VrynocRSEJjbK0sluVIhHBLxRYtcpygnV3w7zaBPe3CSUKeqHw_Q1yUQfG8YAZm8","expiry":"2020-06-02T00:02:38.8106032+05:30"}
 
 others entries...
 ```
@@ -23,7 +23,7 @@ others entries...
 3. Find the drive you want to use, and copy its `type = ...` to  `... token = ...` section.
 4. Replace all linebreaks with `\n`
 5. Deploy with the button above, and paste that text in `RCLONE_CONFIG`
-6. Set `RCLONE_DESTINATION` to a path you want to store your downloaded files.
+6. Set `download` to a path you want to store your downloaded files.
 
 ## FAQ
 
