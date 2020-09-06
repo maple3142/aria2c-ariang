@@ -15,7 +15,7 @@
 2. Clone this repository and enter it.
 3. Run `heroku apps:create APP_NAME` to create it.
 4. Run `heroku config:set -a APP_NAME ARIA2C_SECRET=ARIA2_SECRET` and `heroku config:set -a APP_NAME HEROKU_APP_NAME=APP_NAME`.
-5. Run `heroku container:login`, `heroku container:push` and `heroku container:release -a APP_NAME`.
+5. Run `heroku container:push web -a APP_NAME` and `heroku container:release web -a APP_NAME`.
 6. Run `heroku open -a APP_NAME` and it will open your browser to deployed instance. 
 
 ### Optional: Sync downloaded file to your cloud drive using Rclone
