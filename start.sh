@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH="$(cat PATH)"
+
 if [[ -n $RCLONE_CONFIG && -n $RCLONE_DESTINATION ]]; then
 	echo "Rclone config detected"
 	echo -e "[DRIVE]\n$RCLONE_CONFIG" > rclone.conf
