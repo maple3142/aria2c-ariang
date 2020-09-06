@@ -12,7 +12,7 @@
 ### Steps
 
 1. Run `heroku login` to login, then `heroku container:login` too.
-2. Clone this repository and enter it.
+2. Clone this repository and enter it. (PS: Please run `git config --global core.autocrlf false` before `git clone` if you are using Windows.)
 3. Run `heroku apps:create APP_NAME` to create it.
 4. Run `heroku config:set -a APP_NAME ARIA2C_SECRET=ARIA2_SECRET` and `heroku config:set -a APP_NAME HEROKU_APP_NAME=APP_NAME`.
 5. Run `heroku container:push web -a APP_NAME` and `heroku container:release web -a APP_NAME`.
