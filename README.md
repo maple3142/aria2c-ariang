@@ -1,10 +1,24 @@
 # Heroku aria2c
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+## Deploying
 
-> Do not overuse it, or your account might be banned by Heroku.
+### Requirement
 
-## Optionally sync downloaded file to your cloud drive with Rclone
+* [Docker](https://www.docker.com/)
+* [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+* [git](https://git-scm.com/)
+* Ability to use terminal
+
+### Steps
+
+1. Run `heroku login` to login, then `heroku container:login` too.
+2. Clone this repository and enter it.
+3. Run `heroku apps:create APP_NAME` to create it.
+4. Run `heroku config:set -a APP_NAME ARIA2C_SECRET=ARIA2_SECRET` and `heroku config:set -a APP_NAME HEROKU_APP_NAME=APP_NAME`.
+5. Run `heroku container:login`, `heroku container:push` and `heroku container:release -a APP_NAME`.
+6. Run `heroku open -a APP_NAME` and it will open your browser to deployed instance. 
+
+### Optional: Sync downloaded file to your cloud drive using Rclone
 
 1. Setup Rclone locally by following offical instructions: https://rclone.org/docs/
 2. Find your `rclone.conf` file, it should look like this:
@@ -21,9 +35,9 @@ others entries...
 ```
 
 3. Find the drive you want to use, and copy its `type = ...` to  `... token = ...` section.
-4. Replace all linebreaks with `\n`
-5. Deploy with the button above, and paste that text in `RCLONE_CONFIG`
-6. Set `RCLONE_DESTINATION` to a path you want to store your downloaded files.
+4. Replace all linebreaks with `\n`.
+5. Run `heroku config:set -a APP_NAME RCLONE_CONFIG=THAT_TEXT`.
+6. Run `heroku config:set -a APP_NAME RCLONE_DESTINATION=DOWNLOAD_DESTINATION`, `DOWNLOAD_DESTINATION` is a path starting with `/`.
 
 ## FAQ
 
@@ -38,7 +52,3 @@ No. Just wait for its idling, and your files will be deleted.
 ### You said it will idle automatically, so I can't download large files?
 
 It will generate fake requests when there are downloading or uploading tasks, so it won't idle when your files aren't completed.
-
-### I don't know how to setup Rclone, can you help me?
-
-No. I thought the instructions above are enough.
