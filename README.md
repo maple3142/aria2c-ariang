@@ -2,6 +2,8 @@
 
 ## Deploying
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/maple3142/heroku-aria2c/tree/master)
+
 ### Requirement
 
 * [Docker](https://www.docker.com/)
