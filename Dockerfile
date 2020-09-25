@@ -2,8 +2,9 @@ FROM node:lts-buster
 
 WORKDIR /app
 COPY package.json .
+COPY setup.sh .
+RUN bash setup.sh
 COPY yarn.lock .
 RUN yarn
 COPY . .
-RUN bash setup.sh
 CMD ["bash", "start.sh"]

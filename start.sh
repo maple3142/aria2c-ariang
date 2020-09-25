@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ -f .env ]; then
+    echo ".env file found, sourcing it"
+	set -o allexport
+	source .env
+	set +o allexport
+fi
+
 export PATH="$(cat PATH)"
 
 if [[ -n $RCLONE_CONFIG && -n $RCLONE_DESTINATION ]]; then

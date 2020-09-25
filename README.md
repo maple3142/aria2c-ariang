@@ -1,6 +1,9 @@
-# Heroku aria2c
+# Aria2c+AriaNg
 
-## Deploying
+> It it recommended to find other platform than Heroku to deploy this as they are actively prevent this from deploying there.
+> You can find many free platforms here: https://free-for.dev/
+
+## Deploying On Heroku
 
 ### Requirement
 
@@ -14,7 +17,7 @@
 1. Run `heroku login` to login, then `heroku container:login` too.
 2. Clone this repository and enter it. (PS: Please run `git config --global core.autocrlf false` before `git clone` if you are using Windows.)
 3. Run `heroku apps:create APP_NAME` to create it.
-4. Run `heroku config:set -a APP_NAME ARIA2C_SECRET=ARIA2_SECRET` and `heroku config:set -a APP_NAME HEROKU_APP_NAME=APP_NAME`.
+4. Copy `.env.template` to `.env`, and edit it accordingly.
 5. Run `heroku container:push web -a APP_NAME` and `heroku container:release web -a APP_NAME`.
 6. Run `heroku open -a APP_NAME` and it will open your browser to deployed instance. 
 
@@ -36,8 +39,8 @@ others entries...
 
 3. Find the drive you want to use, and copy its `type = ...` to  `... token = ...` section.
 4. Replace all linebreaks with `\n`.
-5. Run `heroku config:set -a APP_NAME RCLONE_CONFIG=THAT_TEXT`.
-6. Run `heroku config:set -a APP_NAME RCLONE_DESTINATION=DOWNLOAD_DESTINATION`, `DOWNLOAD_DESTINATION` is a path starting with `/`.
+5. That text will be `RCLONE_CONFIG` in `.env` file.
+6. `DOWNLOAD_DESTINATION` in `.env` is a path starting with `/`.
 
 ## FAQ
 
