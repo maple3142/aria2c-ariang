@@ -21,7 +21,7 @@ jobs:
         run: |
           cat > .env << EOF
           ARIA2C_SECRET= ${ARIA2C_SECRET}
-          RCLONE_CONFIG='${RCLONE_CONFIG}'
+          RCLONE_CONFIG="${RCLONE_CONFIG}"
           RCLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
           
