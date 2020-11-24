@@ -20,7 +20,8 @@ jobs:
           RCLONE_DESTINATION: ${{ secrets.RCLONE_DESTINATION }}
         run: |
           cat > .env << EOF
-          ARIA2C_SECRET= ${ARIA2C_SECRET}
+          ARIA2C_SECRET=${ARIA2C_SECRET}
+          HEROKU_APP_NAME=${HEROKU_APP_NAME}
           RCLONE_CONFIG="${RCLONE_CONFIG}"
           RCLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
