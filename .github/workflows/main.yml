@@ -1,0 +1,33 @@
+# This is a basic workflow to help you get started with Actions
+name: Deploy to heroku
+
+on:
+ # push:
+#    branches:
+ #     - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Creat .env file
+        env: 
+          RCLONE_CONFIG: ${{ secrets.RCLONE_CONFIG }}
+          ARIA2C_SECRET: ${{ secrets.ARIA2C_SECRET }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+          RCLONE_DESTINATION: ${{ secrets.RCLONE_DESTINATION }}
+        run: |
+          cat > .env << EOF
+          ARIA2C_SECRET= ${ARIA2C_SECRET}
+          RCLONE_CONFIG='${RCLONE_CONFIG}'
+          RCLONE_DESTINATION=${RCLONE_DESTINATION}
+          EOF
+          
+      - uses: akhileshns/heroku-deploy@v3.5.7 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}" #Must be unique in Heroku
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          usedocker: true
