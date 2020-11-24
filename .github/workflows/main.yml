@@ -26,6 +26,7 @@ jobs:
           RCLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
           cat .env
+          
       - uses: akhileshns/heroku-deploy@v3.6.8  # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
